@@ -1,8 +1,5 @@
 # Day 2 - Rock paper scissors
-
 import pandas as pd
-
-# part1
 
 def rps_score(val1, val2):
     input_map=[("A", "X"), ("B", "Y"), ("C", "Z")]
@@ -20,11 +17,6 @@ def rps_score(val1, val2):
             init_score += 0
     return init_score
 
-file1 = pd.read_csv('data/day2.txt', sep=' ', header=None)
-
-all_scores = file1.apply(lambda x: rps_score(*x), axis=1)
-sum(all_scores)
-
 
 def action_to_take(val1, val2):
     # X = lose
@@ -41,19 +33,16 @@ def action_to_take(val1, val2):
         choice = [y for x, y in input_map if x==val1][0]
     return choice
 
-   
+
 def part2(val1, val2):   
     return rps_score(val1, action_to_take(val1, val2))
 
-    
-part2_scores = file1.apply(lambda x: part2(*x), axis=1)
-sum(part2_scores)
 
-part2("A", "Y") ==4
-part2("B", "X") == 1
-part2("C", "Z") == 7
-
-
+file1 = pd.read_csv('data/day2.txt', sep=' ', header=None)
+# part 1
+all_scores = file1.apply(lambda x: rps_score(*x), axis=1)
+sum(all_scores)
+# part 2
 all_scores = file1.apply(lambda x: part2(*x), axis=1)
 
 sum(list(all_scores))
